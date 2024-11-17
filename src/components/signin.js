@@ -18,7 +18,7 @@ function SignIn() {
         console.log('API URL:', process.env.REACT_APP_API_URL); // Check if the environment variable is available
         try {
             // Update this URL to match the backend endpoint for sign-in
-            const response = await fetch(`http://localhost:5000/signin`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/signin`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
