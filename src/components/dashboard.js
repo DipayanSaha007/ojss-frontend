@@ -1,3 +1,5 @@
+// dashboard code:
+
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './styles/Dashboard.module.css';
@@ -7,15 +9,11 @@ function Dashboard() {
 
     const handleSignOut = () => {
         // Clear authentication state here if needed, such as localStorage or sessionStorage
-
-        // Navigate to the home page ("/")
-        navigate('/');
+        navigate('/'); // Navigate to the home page ("/")
     };
 
     return (
-        <div 
-            className={styles.container} // Apply the CSS module class
-        >
+        <div className={styles.container}>
             {/* Sign Out Button */}
             <div className={styles.signOutBtn}>
                 <button onClick={handleSignOut}>Sign Out</button>
@@ -23,44 +21,45 @@ function Dashboard() {
 
             <h2>Welcome to your Dashboard!</h2>
 
-            {/* Available Services Card */}
+            {/* Product Catalog Card */}
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
-                    <h3>Search Jewellery</h3>
+                    <h3>Product Catalog</h3>
                 </div>
                 <div className={styles.cardBody}>
-                    <p>Check out our <Link to="/search-product">"Search Jewellery"</Link> to add a jewellery to the cart.</p>
+                    <p>Explore and add jewelry to your cart. <Link to="/product-catalog">"View Product Catalog"</Link></p>
                 </div>
             </div>
 
-            {/* Your Appointments Card */}
+            // {/* Search Jewelry Card */}
+            // <div className={styles.card}>
+            //     <div className={styles.cardTitle}>
+            //         <h3>Search Jewellery</h3>
+            //     </div>
+            //     <div className={styles.cardBody}>
+            //         <p>Search for your desired jewelry. <Link to="/search-product">"Search Jewellery"</Link></p>
+            //     </div>
+            // </div>
+
+            {/* Shopping Cart Card */}
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <h3>Shopping Cart</h3>
                 </div>
                 <div className={styles.cardBody}>
-                    <p>List of Your Items added to the cart. <Link to="/shopping-cart">"Shopping Cart"</Link></p>
+                    <p>View your added items in the cart. <Link to="/shopping-cart">"Shopping Cart"</Link></p>
                 </div>
             </div>
 
+            {/* My Orders Card */}
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <h3>My Orders</h3>
                 </div>
                 <div className={styles.cardBody}>
-                    <p>Check out <Link to="/my-orders">"Your Orders"</Link> .</p>
+                    <p>View your order history. <Link to="/my-orders">"Your Orders"</Link></p>
                 </div>
             </div>
-
-            {/* Staff Management Card
-            <div className={styles.card}>
-                <div className={styles.cardTitle}>
-                    <h3>Staff Management</h3>
-                </div>
-                <div className={styles.cardBody}>
-                    <p>Check out our <Link to="/staff-management">"Staffs and Ratings"</Link> to know more.</p>
-                </div>
-            </div> */}
 
             {/* Edit Profile Card */}
             <div className={styles.card}>
@@ -72,13 +71,13 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* Customer Query Card */}
+            {/* Customer Queries Card */}
             <div className={styles.card}>
                 <div className={styles.cardTitle}>
                     <h3>Customer Queries</h3>
                 </div>
                 <div className={styles.cardBody}>
-                    <p>Have any questions? Reach out to us. <Link to="/customer-query">"Submit a Query"</Link></p>
+                    <p>Have any questions? Submit your query. <Link to="/customer-query">"Submit a Query"</Link></p>
                 </div>
             </div>
         </div>
