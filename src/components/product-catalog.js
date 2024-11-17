@@ -48,7 +48,7 @@ const ProductCatalog = () => {
           </p>
           <label>
             Size:
-            <select id={${product.name}-size}>
+            <select id={`${product.name}-size`}>
               {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
                 <option key={size} value={size}>
                   {size}
@@ -58,7 +58,7 @@ const ProductCatalog = () => {
           </label>
           <label>
             Quantity:
-            <select id={${product.name}-quantity}>
+            <select id={`${product.name}-quantity`}>
               {[...Array(11).keys()].map((qty) => (
                 <option key={qty} value={qty}>
                   {qty}
@@ -70,8 +70,8 @@ const ProductCatalog = () => {
             onClick={() =>
               addToCart(
                 product,
-                document.getElementById(${product.name}-quantity).value,
-                document.getElementById(${product.name}-size).value
+                document.getElementById(`${product.name}-quantity`).value,
+                document.getElementById(`${product.name}-size`).value
               )
             }
           >
