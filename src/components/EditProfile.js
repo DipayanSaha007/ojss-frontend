@@ -33,7 +33,7 @@ function EditProfile() {
         setLoading(true);  // Start loading state
 
         try {
-            const response = await fetch(`http://localhost:5000/edit-profile`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/edit-profile`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, newUsername, newPassword })
