@@ -31,15 +31,15 @@ function Dashboard() {
                 </div>
             </div>
 
-            // {/* Search Jewelry Card */}
-            // <div className={styles.card}>
-            //     <div className={styles.cardTitle}>
-            //         <h3>Search Jewellery</h3>
-            //     </div>
-            //     <div className={styles.cardBody}>
-            //         <p>Search for your desired jewelry. <Link to="/search-product">"Search Jewellery"</Link></p>
-            //     </div>
-            // </div>
+            {/* Search Jewelry Card 
+            <div className={styles.card}>
+                <div className={styles.cardTitle}>
+                    <h3>Search Jewellery</h3>
+                </div>
+                <div className={styles.cardBody}>
+                    <p>Search for your desired jewelry. <Link to="/search-product">"Search Jewellery"</Link></p>
+                </div>
+            </div> */}
 
             {/* Shopping Cart Card */}
             <div className={styles.card}>
