@@ -1,86 +1,86 @@
-// Function to create the Product Catalog page
-function createProductCatalog() {
-    const body = document.body;
+// product-catalog code:
 
-    // Create Heading
-    const heading = document.createElement('h2');
-    heading.textContent = 'Product Catalog';
-    body.appendChild(heading);
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-    // Function to create individual product sections
-    function createProductSection(productName, price) {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('product');
+const ProductCatalog = () => {
+  const navigate = useNavigate();
 
-        const productInfo = document.createElement('p');
-        productInfo.textContent = `${productName} - ₹${price}`;
-        productDiv.appendChild(productInfo);
+  // Jewelry products list
+  const products = [
+    { name: 'Necklaces', price: 300 },
+    { name: 'Earrings', price: 250 },
+    { name: 'Rings', price: 400 },
+    { name: 'Bracelets', price: 500 },
+    { name: 'Anklets', price: 450 },
+    { name: 'Brooches', price: 350 },
+    { name: 'Cufflinks', price: 450 },
+    { name: 'Hairpins', price: 100 },
+    { name: 'Body Chains', price: 300 },
+    { name: 'Nose Rings', price: 250 },
+    { name: 'Toe Rings', price: 350 },
+    { name: 'Belly Chains', price: 300 },
+    { name: 'Charms', price: 400 },
+    { name: 'Chokers', price: 550 },
+    { name: 'Watches', price: 700 },
+  ];
 
-        // Size selection
-        const sizeLabel = document.createElement('label');
-        sizeLabel.setAttribute('for', `${productName.toLowerCase()}-size`);
-        sizeLabel.textContent = 'Size:';
-        productDiv.appendChild(sizeLabel);
-
-        const sizeSelect = document.createElement('select');
-        sizeSelect.id = `${productName.toLowerCase()}-size`;
-        ['XS', 'S', 'M', 'L', 'XL'].forEach(size => {
-            const option = document.createElement('option');
-            option.value = size;
-            option.textContent = size;
-            sizeSelect.appendChild(option);
-        });
-        productDiv.appendChild(sizeSelect);
-
-        // Quantity selection
-        const quantityLabel = document.createElement('label');
-        quantityLabel.setAttribute('for', `${productName.toLowerCase()}-quantity`);
-        quantityLabel.textContent = 'Quantity:';
-        productDiv.appendChild(quantityLabel);
-
-        const quantitySelect = document.createElement('select');
-        quantitySelect.id = `${productName.toLowerCase()}-quantity`;
-        for (let i = 0; i <= 10; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            quantitySelect.appendChild(option);
-        }
-        productDiv.appendChild(quantitySelect);
-
-        // Add to Cart Button
-        const addToCartButton = document.createElement('button');
-        addToCartButton.textContent = 'Add to Cart';
-        addToCartButton.onclick = function () {
-            addToCart(productName.toLowerCase(), quantitySelect.value, sizeSelect.value, price);
-        };
-        productDiv.appendChild(addToCartButton);
-
-        return productDiv;
+  const addToCart = (product, quantity, size) => {
+    if (quantity === '0') {
+      alert('Please select a valid quantity.');
+      return;
     }
 
-    // Add product sections to the page
-    body.appendChild(createProductSection('Necklaces', 500));
-    body.appendChild(createProductSection('Bracelets', 250));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({ name: product.name, price: product.price, size, quantity: Number(quantity) });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(${product.name} has been added to the cart.);
+    navigate('/shopping-cart'); // Redirect to the shopping cart
+  };
 
-    // Function to add product to the cart
-    function addToCart(product, quantity, size, price) {
-        const totalPrice = price * quantity;
+  return (
+    <div>
+      <h2>Product Catalog</h2>
+      {products.map((product) => (
+        <div key={product.name} className="product">
+          <p>
+            {product.name} - ₹{product.price}
+          </p>
+          <label>
+            Size:
+            <select id={${product.name}-size}>
+              {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Quantity:
+            <select id={${product.name}-quantity}>
+              {[...Array(11).keys()].map((qty) => (
+                <option key={qty} value={qty}>
+                  {qty}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button
+            onClick={() =>
+              addToCart(
+                product,
+                document.getElementById(${product.name}-quantity).value,
+                document.getElementById(${product.name}-size).value
+              )
+            }
+          >
+            Add to Cart
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+};
 
-        // Get cart from localStorage or initialize an empty cart
-        const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-        // Add product details to the cart
-        const productInCart = { product, quantity, size, totalPrice };
-        cart.push(productInCart);
-
-        // Save updated cart in localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-
-        // Redirect to shopping cart page
-        window.location.href = 'shopping-cart.js';
-    }
-}
-
-// Call the function to create the product catalog when the script runs
-createProductCatalog();
+export default ProductCatalog;
