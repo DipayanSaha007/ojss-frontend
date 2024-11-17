@@ -26,7 +26,7 @@ const ForgotPassword = () => {
         setSuccessMessage('');
 
         try {
-            const response = await fetch(`http://localhost:5000/forgot-password`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/forgot-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -68,7 +68,7 @@ const ForgotPassword = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:5000/reset-password`, {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, resetCode, newPassword })
