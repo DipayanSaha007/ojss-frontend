@@ -34,7 +34,7 @@ const ProductCatalog = () => {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push({ name: product.name, price: product.price, size, quantity: Number(quantity) });
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert(${product.name} has been added to the cart.);
+    alert(`${product.name} has been added to the cart.`);
     navigate('/shopping-cart'); // Redirect to the shopping cart
   };
 
