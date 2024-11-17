@@ -35,7 +35,7 @@ root.render(
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/edit-profile" element={<EditProfile />} />
-          // <Route path="/search-product" element={<SearchProduct />} />
+          {/* <Route path="/search-product" element={<SearchProduct />} /> */}
           <Route path="/customer-query" element={<CustomerQuery />} />
           {/* <Route path="/catalog" element={<Catalog />} /> */}
           <Route path="/product-catalog" element={<ProductCatalog />} />
