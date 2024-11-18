@@ -9,16 +9,12 @@ function Payment() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Load payment method from local storage if available
-    const savedPaymentMethod = localStorage.getItem('paymentMethod');
-    if (savedPaymentMethod) {
-      setPaymentMethod(savedPaymentMethod);
-    }
+    // Clear any previously selected payment method to ensure user selects each time
+    setPaymentMethod(null);
   }, []);
 
   const handlePaymentSelection = (method) => {
     setPaymentMethod(method);
-    localStorage.setItem('paymentMethod', method); // Save selected payment method to local storage
   };
 
   const handleInputChange = (e) => {
@@ -75,55 +71,24 @@ function Payment() {
       <h2>Payment Options</h2>
       {!paymentMethod && (
         <>
-          <button onClick={() => handlePaymentSelection('UPI')} className="btn">Pay with UPI</button>
-          <button onClick={() => handlePaymentSelection('Credit Card')} className="btn">Pay with Credit Card</button>
+          <button onClick={() => handlePaymentSelection('card')}>Pay with Card</button>
+          <button onClick={() => handlePaymentSelection('upi')}>Pay with UPI</button>
         </>
       )}
-      
-      {paymentMethod === 'Credit Card' && (
+      {paymentMethod === 'card' && (
         <div className="card-payment-form">
           <h3>Enter Card Details</h3>
-          <input
-            type="text"
-            name="number"
-            placeholder="Card Number"
-            value={cardDetails.number}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="expiry"
-            placeholder="Expiry Date (MM/YY)"
-            value={cardDetails.expiry}
-            onChange={handleInputChange}
-          />
-          <input
-            type="password"
-            name="cvv"
-            placeholder="CVV"
-            value={cardDetails.cvv}
-            onChange={handleInputChange}
-          />
-          <button onClick={handleCardSubmit} className="btn" disabled={loading}>Submit</button>
+          <input type="text" name="number" placeholder="Card Number" value={cardDetails.number} onChange={handleInputChange} />
+          <input type="text" name="expiry" placeholder="Expiry Date" value={cardDetails.expiry} onChange={handleInputChange} />
+          <input type="text" name="cvv" placeholder="CVV" value={cardDetails.cvv} onChange={handleInputChange} />
+          <button onClick={handleCardSubmit} disabled={loading}>{loading ? 'Processing...' : 'Submit Payment'}</button>
         </div>
       )}
-      
-      {paymentMethod === 'UPI' && (
+      {paymentMethod === 'upi' && (
         <div className="upi-payment-form">
           <h3>Enter UPI ID</h3>
-          <input
-            type="text"
-            placeholder="UPI ID"
-            value={upiId}
-            onChange={(e) => setUpiId(e.target.value)}
-          />
-          <button onClick={handleUpiSubmit} className="btn" disabled={loading}>Submit</button>
-        </div>
-      )}
-
-      {loading && (
-        <div className="loading-indicator">
-          <p>Processing your payment...</p>
+          <input type="text" placeholder="UPI ID" value={upiId} onChange={(e) => setUpiId(e.target.value)} />
+          <button onClick={handleUpiSubmit} disabled={loading}>{loading ? 'Processing...' : 'Submit Payment'}</button>
         </div>
       )}
     </div>
